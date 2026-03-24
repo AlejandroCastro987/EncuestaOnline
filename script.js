@@ -34,13 +34,12 @@ surveyForm.addEventListener('submit', async function (e) {
 
         console.log('Enviando via POST a n8n TEST:', n8nWebhookUrl);
 
-        // Envío via POST (con parámetros en la URL para máxima compatibilidad con CORS)
-        console.log('Iniciando envío a n8n (Modo Compatible)...');
+        // Envío via GET (El método más compatible y con menos restricciones de seguridad)
+        console.log('Iniciando envío a n8n (Modo GET Ultra-Compatible)...');
         
-        // Al usar 'no-cors', la petición se envía pero el navegador no nos deja leer la respuesta.
         // n8n recibirá los datos en los 'Query Parameters'.
         await fetch(n8nWebhookUrl, {
-            method: 'POST',
+            method: 'GET',
             mode: 'no-cors', 
         });
 
