@@ -48,6 +48,14 @@ surveyForm.addEventListener('submit', async function (e) {
         });
 
         if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error(
+                    "Error 404: El Webhook no está registrado. \n\n" +
+                    "SOLUCIÓN: \n" +
+                    "1. Pulsa el botón 'Active' (arriba a la derecha) en n8n.\n" +
+                    "2. O cambia la URL en el código a 'webhook-test' para pruebas temporales."
+                );
+            }
             throw new Error(`n8n respondió con error ${response.status}. ¿Está el flujo Activo?`);
         }
 
