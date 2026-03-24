@@ -1,13 +1,13 @@
 :root {
-    --primary-color: #6366f1;
-    --primary-glow: rgba(99, 102, 241, 0.5);
-    --secondary-color: #a855f7;
-    --secondary-glow: rgba(168, 85, 247, 0.5);
-    --bg-dark: #0f172a;
-    --text-light: #f8fafc;
-    --text-muted: #94a3b8;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --primary-color: #ec4899; /* Pink */
+    --primary-glow: rgba(236, 72, 153, 0.5);
+    --secondary-color: #8b5cf6; /* Violet */
+    --secondary-glow: rgba(139, 92, 246, 0.5);
+    --bg-dark: #0f071a; /* Very dark purple/black */
+    --text-light: #fdf2f8;
+    --text-muted: #d8b4fe;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -49,21 +49,21 @@ body {
 }
 
 .blob-1 {
-    background: var(--primary-color);
+    background: var(--primary-color); /* Pink */
     top: -100px;
     left: -100px;
     animation-delay: 0s;
 }
 
 .blob-2 {
-    background: var(--secondary-color);
+    background: var(--secondary-color); /* Violet */
     bottom: -150px;
     right: -100px;
     animation-delay: -5s;
 }
 
 .blob-3 {
-    background: #ec4899;
+    background: #f472b6;
     top: 40%;
     left: 40%;
     width: 300px;
@@ -104,7 +104,8 @@ h1 {
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #818cf8, #c084fc);
+    background: linear-gradient(to right, #f472b6, #a78bfa);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
