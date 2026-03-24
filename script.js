@@ -34,32 +34,17 @@ surveyForm.addEventListener('submit', async function (e) {
 
         console.log('Enviando via POST a n8n TEST:', n8nWebhookUrl);
 
-        // Envío via POST
-        console.log('Iniciando envío a n8n...');
+        // Envío via POST (con parámetros en la URL para máxima compatibilidad con CORS)
+        console.log('Iniciando envío a n8n (Modo Compatible)...');
         
-        const response = await fetch(n8nWebhookUrl, {
+        // Al usar 'no-cors', la petición se envía pero el navegador no nos deja leer la respuesta.
+        // n8n recibirá los datos en los 'Query Parameters'.
+        await fetch(n8nWebhookUrl, {
             method: 'POST',
-            // El modo 'no-cors' impide que se envíe el Content-Type: application/json correctamente
-            // n8n Cloud permite CORS por defecto en la mayoría de configuraciones
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(n8nData)
+            mode: 'no-cors', 
         });
 
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error(
-                    "Error 404: El Webhook no está registrado. \n\n" +
-                    "SOLUCIÓN: \n" +
-                    "1. Pulsa el botón 'Active' (arriba a la derecha) en n8n.\n" +
-                    "2. O cambia la URL en el código a 'webhook-test' para pruebas temporales."
-                );
-            }
-            throw new Error(`n8n respondió con error ${response.status}. ¿Está el flujo Activo?`);
-        }
-
-        console.log('Petición recibida por n8n exitosamente');
+        console.log('Petición enviada. Revisa n8n para confirmar la recepción.');
 
         // Ocultar formulario y mostrar éxito
         surveyForm.classList.add('hidden');
