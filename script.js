@@ -35,19 +35,23 @@ surveyForm.addEventListener('submit', async function (e) {
         console.log('Enviando via POST a n8n TEST:', n8nWebhookUrl);
 
         // Envío via POST
-        try {
-            await fetch(n8nWebhookUrl, {
-                method: 'POST',
-                mode: 'no-cors', // Para evitar bloqueos de seguridad
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(n8nData)
-            });
-            console.log('Petición de TEST enviada');
-        } catch (fetchError) {
-            console.error('Error de red:', fetchError);
+        console.log('Iniciando envío a n8n...');
+        
+        const response = await fetch(n8nWebhookUrl, {
+            method: 'POST',
+            // El modo 'no-cors' impide que se envíe el Content-Type: application/json correctamente
+            // n8n Cloud permite CORS por defecto en la mayoría de configuraciones
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(n8nData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`n8n respondió con error ${response.status}. ¿Está el flujo Activo?`);
         }
+
+        console.log('Petición recibida por n8n exitosamente');
 
         // Ocultar formulario y mostrar éxito
         surveyForm.classList.add('hidden');
