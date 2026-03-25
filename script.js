@@ -28,19 +28,18 @@ surveyForm.addEventListener('submit', async function (e) {
             comentarios: data.comentarios_adicionales || ""
         };
 
-        const params = new URLSearchParams(n8nData).toString();
-        // URL de producción (Recuerda poner el flujo en "Active" en n8n)
-        const n8nWebhookUrl = `https://luishurtado.app.n8n.cloud/webhook/06ccde91-7c50-4d4e-81e5-1ae6ac43c659?${params}`;
+        const n8nWebhookUrl = 'https://luishurtado.app.n8n.cloud/webhook/06ccde91-7c50-4d4e-81e5-1ae6ac43c659';
 
-        console.log('Enviando via POST a n8n TEST:', n8nWebhookUrl);
+        console.log('Enviando via POST a n8n PRODUCCIÓN:', n8nWebhookUrl);
 
-        // Envío via GET (El método más compatible y con menos restricciones de seguridad)
-        console.log('Iniciando envío a n8n (Modo GET Ultra-Compatible)...');
-        
-        // n8n recibirá los datos en los 'Query Parameters'.
+        // Envío via POST
         await fetch(n8nWebhookUrl, {
-            method: 'GET',
+            method: 'POST',
             mode: 'no-cors', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(n8nData)
         });
 
         console.log('Petición enviada. Revisa n8n para confirmar la recepción.');
