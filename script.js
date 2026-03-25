@@ -29,8 +29,8 @@ surveyForm.addEventListener('submit', async function (e) {
         };
 
         const params = new URLSearchParams(n8nData).toString();
-        // URL de TEST (para usar con el botón "Listen for test event" en n8n)
-        const n8nWebhookUrl = `https://luishurtado.app.n8n.cloud/webhook-test/06ccde91-7c50-4d4e-81e5-1ae6ac43c659?${params}`;
+        // URL de producción (Recuerda poner el flujo en "Active" en n8n)
+        const n8nWebhookUrl = `https://luishurtado.app.n8n.cloud/webhook/06ccde91-7c50-4d4e-81e5-1ae6ac43c659?${params}`;
 
         console.log('Enviando via POST a n8n TEST:', n8nWebhookUrl);
 
